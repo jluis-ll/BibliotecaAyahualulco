@@ -1,0 +1,118 @@
+.gestion-libros{
+    padding: 40px;
+}
+
+/* ===== ENCABEZADO ===== */
+
+.encabezado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.encabezado h1{
+    color: #1b263b;
+}
+
+.btn-agregar{
+    background-color: #1b263b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-agregar:hover{
+    background-color: #415a77;
+}
+
+/* ===== BUSCADOR ===== */
+
+.busqueda{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.busqueda input{
+    width: 350px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.busqueda button{
+    padding: 12px 20px;
+    border: none;
+    background-color: #1b263b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===== TABLA ===== */
+
+.tabla-libros{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabla-libros thead{
+    background-color: #1b263b;
+    color: white;
+}
+
+.tabla-libros th,
+.tabla-libros td{
+    padding: 16px;
+    text-align: center;
+}
+
+.tabla-libros tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-libros tbody tr:hover{
+    background-color: #f4f4f4;
+}
+
+/* ===== BOTONES ===== */
+
+.acciones{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.editar,
+.eliminar{
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.editar{
+    background-color: #415a77;
+}
+
+.editar:hover{
+    background-color: #1b263b;
+}
+
+.eliminar{
+    background-color: #c1121f;
+}
+
+.eliminar:hover{
+    background-color: #780000;
+}

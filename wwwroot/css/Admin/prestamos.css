@@ -1,0 +1,89 @@
+.prestamos{
+    padding: 40px;
+}
+
+.encabezado{
+    margin-bottom: 30px;
+}
+
+.encabezado h1{
+    color: #1b263b;
+}
+
+/* ===== FORMULARIO ===== */
+
+.formulario-prestamo{
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label{
+    margin-bottom: 8px;
+    color: #1b263b;
+    font-weight: bold;
+}
+
+.campo input,
+.campo select{
+    width: 250px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.btn-registrar{
+    border: none;
+    background-color: #1b263b;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-registrar:hover{
+    background-color: #415a77;
+}
+
+/* ===== TABLA ===== */
+
+.tabla-prestamos{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.tabla-prestamos thead{
+    background-color: #1b263b;
+    color: white;
+}
+
+.tabla-prestamos th,
+.tabla-prestamos td{
+    padding: 16px;
+    text-align: center;
+}
+
+.tabla-prestamos tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-prestamos tbody tr:hover{
+    background-color: #f4f4f4;
+}

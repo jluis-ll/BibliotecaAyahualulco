@@ -1,0 +1,87 @@
+﻿@page
+@model MyApp.Namespace.PrestamosModel
+@{
+    ViewData["Title"] = "Préstamos";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/prestamos.css" />
+}
+
+<section class="prestamos">
+
+    <div class="encabezado">
+        <h1>Préstamos</h1>
+    </div>
+
+    <div class="formulario-prestamo">
+
+        <div class="campo">
+            <label>Folio del usuario</label>
+            <input type="text" placeholder="Ejemplo: FOL-001">
+        </div>
+
+        <div class="campo">
+            <label>Libro</label>
+
+            <select>
+                <option>Selecciona un libro</option>
+                <option>El Principito</option>
+                <option>Cien años de soledad</option>
+                <option>Don Quijote de la Mancha</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label>Fecha de devolución</label>
+            <input type="date">
+        </div>
+
+        <button class="btn-registrar">
+            Registrar préstamo
+        </button>
+
+    </div>
+
+    <div class="tabla-contenedor">
+
+        <table class="tabla-prestamos">
+
+            <thead>
+                <tr>
+                    <th>Folio</th>
+                    <th>Usuario</th>
+                    <th>Libro</th>
+                    <th>Fecha préstamo</th>
+                    <th>Fecha devolución</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>FOL-001</td>
+                    <td>Carlos Hernández</td>
+                    <td>El Principito</td>
+                    <td>28/05/2026</td>
+                    <td>04/06/2026</td>
+                    <td>Activo</td>
+                </tr>
+
+                <tr>
+                    <td>FOL-002</td>
+                    <td>Ana López</td>
+                    <td>Don Quijote</td>
+                    <td>20/05/2026</td>
+                    <td>27/05/2026</td>
+                    <td>Atrasado</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>

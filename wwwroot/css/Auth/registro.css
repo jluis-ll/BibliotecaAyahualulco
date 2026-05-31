@@ -1,0 +1,61 @@
+.registro{
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.contenedor-registro{
+    width: 100%;
+    max-width: 520px;
+    background-color: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+.contenedor-registro h1{
+    color: #1b263b;
+    margin-bottom: 10px;
+}
+
+.contenedor-registro p{
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.campo{
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.campo label{
+    display: block;
+    margin-bottom: 8px;
+    color: #1b263b;
+    font-weight: bold;
+}
+
+.campo input{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.btn-registro{
+    width: 100%;
+    padding: 13px;
+    border: none;
+    background-color: #1b263b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-registro:hover{
+    background-color: #415a77;
+}

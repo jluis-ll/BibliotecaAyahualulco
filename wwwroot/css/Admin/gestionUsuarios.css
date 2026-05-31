@@ -1,0 +1,91 @@
+.gestion-usuarios{
+    padding: 40px;
+}
+
+.encabezado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.encabezado h1{
+    color: #1b263b;
+}
+
+.btn-agregar{
+    background-color: #1b263b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.busqueda{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.busqueda input{
+    width: 350px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.busqueda button{
+    padding: 12px 20px;
+    border: none;
+    background-color: #1b263b;
+    color: white;
+    border-radius: 8px;
+}
+
+.tabla-usuarios{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabla-usuarios thead{
+    background-color: #1b263b;
+    color: white;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td{
+    padding: 16px;
+    text-align: center;
+}
+
+.tabla-usuarios tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+
+.acciones{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.editar,
+.eliminar{
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.editar{
+    background-color: #415a77;
+}
+
+.eliminar{
+    background-color: #c1121f;
+}

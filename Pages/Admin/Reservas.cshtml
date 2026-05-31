@@ -1,0 +1,44 @@
+﻿@page
+@model MyApp.Namespace.ReservasModel
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/reservas.css" />
+}
+
+<section class="reservas">
+    <div class="encabezado">
+        <h1>Reservas</h1>
+    </div>
+
+    <div class="busqueda">
+        <input type="text" placeholder="Buscar reserva por usuario o libro">
+        <button>Buscar</button>
+    </div>
+
+    <table class="tabla-reservas">
+        <thead>
+            <tr>
+                <th>Folio</th>
+                <th>Usuario</th>
+                <th>Libro</th>
+                <th>Fecha reserva</th>
+                <th>Posición</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>FOL-003</td>
+                <td>Luis Martínez</td>
+                <td>Don Quijote</td>
+                <td>29/05/2026</td>
+                <td>1</td>
+                <td>En espera</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

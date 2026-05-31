@@ -1,0 +1,79 @@
+/* ===== DETALLE LIBRO ===== */
+
+.detalle-libro{
+    padding: 50px;
+}
+
+.contenedor-detalle{
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.imagen-libro img{
+    width: 350px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+.info-detalle{
+    flex: 1;
+}
+
+.info-detalle h1{
+    color: #1b263b;
+    margin-bottom: 25px;
+    font-size: 42px;
+}
+
+.info-detalle p{
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #444;
+}
+
+.descripcion{
+    margin-top: 25px;
+    line-height: 1.8;
+}
+
+/* ===== BOTONES ===== */
+
+.acciones{
+    margin-top: 35px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-prestamo,
+.btn-reserva{
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-prestamo{
+    background-color: #1b263b;
+}
+
+.btn-prestamo:hover{
+    background-color: #415a77;
+}
+
+.btn-reserva{
+    background-color: #778da9;
+}
+
+.btn-reserva:hover{
+    background-color: #5c6f87;
+}

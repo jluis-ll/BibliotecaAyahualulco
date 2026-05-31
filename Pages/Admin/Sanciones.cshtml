@@ -1,0 +1,57 @@
+﻿@page
+@model MyApp.Namespace.SancionesModel
+@{
+    ViewData["Title"] = "Sanciones";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/sanciones.css" />
+}
+
+<section class="sanciones">
+    <div class="encabezado">
+        <h1>Sanciones</h1>
+    </div>
+
+    <div class="busqueda">
+        <input type="text" placeholder="Buscar usuario sancionado">
+        <button>Buscar</button>
+    </div>
+
+    <table class="tabla-sanciones">
+        <thead>
+            <tr>
+                <th>Folio</th>
+                <th>Usuario</th>
+                <th>Motivo</th>
+                <th>Días de suspensión</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>FOL-002</td>
+                <td>Ana López</td>
+                <td>Retraso en devolución</td>
+                <td>2</td>
+                <td>Suspendido</td>
+                <td>
+                    <button class="btn-liberar">Liberar sanción</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>FOL-004</td>
+                <td>Juan Pérez</td>
+                <td>Libro extraviado</td>
+                <td>Indefinido</td>
+                <td>Bloqueado</td>
+                <td>
+                    <button class="btn-liberar">Marcar reposición</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

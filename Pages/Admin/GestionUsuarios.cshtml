@@ -1,0 +1,60 @@
+﻿@page
+@model MyApp.Namespace.GestionUsuariosModel
+@{
+    ViewData["Title"] = "Gestión de usuarios";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/gestionUsuarios.css" />
+}
+
+<section class="gestion-usuarios">
+    <div class="encabezado">
+        <h1>Gestión de usuarios</h1>
+        <button class="btn-agregar">Agregar usuario</button>
+    </div>
+
+    <div class="busqueda">
+        <input type="text" placeholder="Buscar usuario por nombre o folio">
+        <button>Buscar</button>
+    </div>
+
+    <table class="tabla-usuarios">
+        <thead>
+            <tr>
+                <th>Folio</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>FOL-001</td>
+                <td>Carlos Hernández</td>
+                <td>2281234567</td>
+                <td>Activo</td>
+                <td>Lector</td>
+                <td class="acciones">
+                    <button class="editar">Editar</button>
+                    <button class="eliminar">Eliminar</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>FOL-002</td>
+                <td>Ana López</td>
+                <td>2287654321</td>
+                <td>Suspendido</td>
+                <td>Lector</td>
+                <td class="acciones">
+                    <button class="editar">Editar</button>
+                    <button class="eliminar">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

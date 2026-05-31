@@ -1,0 +1,50 @@
+﻿@page
+@model MyApp.Namespace.PanelAdminModel
+@{
+    ViewData["Title"] = "Panel administrativo";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Admin/admin.css" />
+}
+
+<section class="panel-admin">
+    <div class="encabezado-admin">
+        <h1>Panel administrativo</h1>
+        <p>Gestiona libros, usuarios, préstamos, devoluciones y sanciones.</p>
+    </div>
+
+    <div class="tarjetas-admin">
+
+        <a href="/Admin/GestionLibros" class="tarjeta-admin">
+            <h3>Gestión de libros</h3>
+            <p>Agregar, editar, eliminar y consultar libros.</p>
+        </a>
+
+        <a href="/Admin/GestionUsuarios" class="tarjeta-admin">
+            <h3>Gestión de usuarios</h3>
+            <p>Administrar lectores registrados en la biblioteca.</p>
+        </a>
+
+        <a href="/Admin/Prestamos" class="tarjeta-admin">
+            <h3>Préstamos</h3>
+            <p>Registrar la salida de libros a domicilio.</p>
+        </a>
+
+        <a href="/Admin/Devoluciones" class="tarjeta-admin">
+            <h3>Devoluciones</h3>
+            <p>Registrar devoluciones y actualizar disponibilidad.</p>
+        </a>
+
+        <a href="/Admin/Sanciones" class="tarjeta-admin">
+            <h3>Sanciones</h3>
+            <p>Consultar usuarios suspendidos o con adeudos.</p>
+        </a>
+
+        <a href="/Admin/Reservas" class="tarjeta-admin">
+            <h3>Reservas</h3>
+            <p>Gestionar lista de espera de libros no disponibles.</p>
+        </a>
+
+    </div>
+</section>

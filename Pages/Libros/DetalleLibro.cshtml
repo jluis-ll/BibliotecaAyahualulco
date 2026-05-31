@@ -1,0 +1,47 @@
+﻿@page
+@model Proyecto.Pages.Libros.DetalleLibroModel
+
+@{
+    ViewData["Title"] = "Detalle del libro";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Libros/detalleLibro.css" />
+}
+
+<section class="detalle-libro">
+    <div class="contenedor-detalle">
+
+        <div class="imagen-libro">
+            <img src="~/img/libro1.jpg" alt="Portada del libro">
+        </div>
+
+        <div class="info-detalle">
+            <h1>@Model.Libro.Nombre</h1>
+
+            <p><strong>Folio:</strong> @Model.Libro.FolioLibro</p>
+            <p><strong>ISBN:</strong> @Model.Libro.Isbn</p>
+            <p><strong>Condición:</strong> @Model.Libro.CondicionLibro</p>
+            <p><strong>Número de páginas:</strong> @Model.Libro.NumeroPaginas</p>
+            <p><strong>País de publicación:</strong> @Model.Libro.PaisPublicacion</p>
+            <p><strong>Número de copias:</strong> @Model.Libro.NumeroCopias</p>
+
+            <p><strong>Editorial:</strong> @Model.Libro.IdEditorialNavigation.Nombre</p>
+
+            <p>
+                <strong>Autor(es):</strong>
+                @string.Join(", ", Model.Libro.IdAutors.Select(a => a.Nombre))
+            </p>
+
+            <p><strong>Tema:</strong> @Model.Libro.IdUbicacionNavigation.IdTemaNavigation.NombTema</p>
+            <p><strong>Pasillo:</strong> @Model.Libro.IdUbicacionNavigation.IdPasilloNavigation.NomPasillo</p>
+            <p><strong>Piso:</strong> @Model.Libro.IdUbicacionNavigation.Piso</p>
+
+            <div class="acciones">
+                <button class="btn-prestamo">Solicitar préstamo</button>
+                <button class="btn-reserva">Reservar libro</button>
+            </div>
+        </div>
+
+    </div>
+</section>

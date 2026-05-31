@@ -1,0 +1,65 @@
+﻿@page
+
+@using Proyecto.Models
+
+@model Proyecto.Pages.Libros.CatalogoModel
+
+@{
+    ViewData["Title"] = "Catálogo";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Libros/catalogo.css" />
+}
+
+<section class="catalogo">
+
+    <div class="encabezado-catalogo">
+        <h1>Catálogo de libros</h1>
+        <p>Consulta los libros disponibles en la biblioteca.</p>
+    </div>
+
+    <div class="filtros">
+        <input type="text" placeholder="Buscar por título, autor o categoría">
+        <button>Buscar</button>
+    </div>
+
+    <div class="contenedor-catalogo">
+
+        @foreach (var libro in Model.Libros)
+        {
+            <div class="tarjeta-libro">
+
+                <img src="~/img/libro1.jpg" alt="Portada">
+
+                <div class="info-libro">
+
+                    <h3>@libro.Nombre</h3>
+
+                    <p>
+                        <strong>ISBN:</strong>
+                        @libro.Isbn
+                    </p>
+
+                    <p>
+                        <strong>País:</strong>
+                        @libro.PaisPublicacion
+                    </p>
+
+                    <p>
+                        <strong>Copias:</strong>
+                        @libro.NumeroCopias
+                    </p>
+
+                    <a asp-page="/Libros/DetalleLibro" asp-route-id="@libro.FolioLibro" class="boton-secundario">
+                        Ver detalles
+                    </a>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</section>

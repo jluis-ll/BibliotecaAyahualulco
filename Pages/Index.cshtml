@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/inicio.css" />
+}
+
+<section class="inicio">
+    <div class="bienvenida">
+        <h1>Biblioteca Municipal de Ayahualulco</h1>
+        <p>Consulta libros, revisa disponibilidad y gestiona préstamos de manera sencilla.</p>
+    </div>
+
+    <div class="busqueda">
+        <input type="text" placeholder="Buscar libro por título, autor o categoría">
+        <button>Buscar</button>
+    </div>
+
+    <div class="accesos">
+        <a asp-page="/Libros/Catalogo" class="boton">Catálogo</a>
+        <a asp-page="/Auth/Login" class="boton">Iniciar sesión</a>
+        <a asp-page="/Auth/Registro" class="boton">Registro</a>
+        <a asp-page="/Admin/PanelAdmin" class="boton">Panel administrativo</a>
+    </div>
+
+    <section class="populares">
+        <h2>Libros populares</h2>
+
+        <div class="contenedor-libros">
+            <div class="libro">
+                <img src="~/img/libro1.jpg" alt="Portada del libro">
+                <h3>El Principito</h3>
+                <p>Antoine de Saint-Exupéry</p>
+                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
+            </div>
+
+            <div class="libro">
+                <img src="~/img/libro2.jpg" alt="Portada del libro">
+                <h3>Cien años de soledad</h3>
+                <p>Gabriel García Márquez</p>
+                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
+            </div>
+
+            <div class="libro">
+                <img src="~/img/libro3.jpg" alt="Portada del libro">
+                <h3>Don Quijote de la Mancha</h3>
+                <p>Miguel de Cervantes</p>
+                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
+            </div>
+        </div>
+    </section>
+</section>

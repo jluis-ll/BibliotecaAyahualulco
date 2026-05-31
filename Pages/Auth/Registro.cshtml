@@ -1,0 +1,50 @@
+﻿@page
+@model MyApp.Namespace.RegistroModel
+@{
+    ViewData["Title"] = "Registro";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Auth/registro.css" />
+}
+
+<section class="registro">
+    <div class="contenedor-registro">
+        <h1>Registro de lector</h1>
+        <p>Crea tu cuenta para solicitar préstamos y reservas.</p>
+
+        <form>
+            <div class="campo">
+                <label>Nombre completo</label>
+                <input type="text" placeholder="Ingresa tu nombre completo">
+            </div>
+
+            <div class="campo">
+                <label>Dirección</label>
+                <input type="text" placeholder="Ingresa tu dirección">
+            </div>
+
+            <div class="campo">
+                <label>Teléfono</label>
+                <input type="tel" placeholder="Ingresa tu teléfono">
+            </div>
+
+            <div class="campo">
+                <label>Correo</label>
+                <input type="email" placeholder="Ingresa tu correo">
+            </div>
+
+            <div class="campo">
+                <label>Fiador</label>
+                <input type="text" placeholder="Nombre del fiador">
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" placeholder="Crea una contraseña">
+            </div>
+
+            <button type="submit" class="btn-registro">Registrarme</button>
+        </form>
+    </div>
+</section>

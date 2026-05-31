@@ -1,0 +1,35 @@
+﻿@page
+@model MyApp.Namespace.LoginModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Auth/login.css" />
+}
+
+<section class="login">
+    <div class="contenedor-login">
+        <h1>Iniciar sesión</h1>
+        <p>Accede con tu folio o correo y contraseña.</p>
+
+        <form>
+            <div class="campo">
+                <label>Correo o folio</label>
+                <input type="text" placeholder="Ejemplo: usuario@gmail.com o FOL-001">
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" placeholder="Ingresa tu contraseña">
+            </div>
+
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        <p class="texto-registro">
+            ¿No tienes cuenta?
+            <a asp-page="/Auth/Registro">Regístrate aquí</a>
+        </p>
+    </div>
+</section>
