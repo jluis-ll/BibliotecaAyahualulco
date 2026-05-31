@@ -27,6 +27,7 @@ public class GestionLibrosModel : PageModel
         Libros = _context.Libros
             .Include(l => l.IdEditorialNavigation)
             .Include(l => l.IdAutors)
+            .Include(l => l.IdUbicacionNavigation)
             .ToList();
 
         Autores = _context.Autors.ToList();
@@ -145,4 +146,39 @@ public class GestionLibrosModel : PageModel
 
         return RedirectToPage();
     }
+
+    public IActionResult OnPostEditar(
+    int FolioLibro,
+    int NumeroCopias,
+    string CondicionLibro,
+    int IdPasillo,
+    string Piso)
+    {
+        var libro = _context.Libros
+            .Include(l => l.IdUbicacionNavigation)
+            .FirstOrDefault(l => l.FolioLibro == FolioLibro);
+
+        if (libro == null)
+        {
+            return NotFound();
+        }
+
+        // ===== ACTUALIZAR LIBRO =====
+
+        libro.NumeroCopias = NumeroCopias;
+        libro.CondicionLibro = CondicionLibro;
+
+        // ===== ACTUALIZAR UBICACION =====
+
+        if (libro.IdUbicacionNavigation != null)
+        {
+            libro.IdUbicacionNavigation.IdPasillo = IdPasillo;
+            libro.IdUbicacionNavigation.Piso = Piso;
+        }
+
+        _context.SaveChanges();
+
+        return RedirectToPage();
+    }
+
 }

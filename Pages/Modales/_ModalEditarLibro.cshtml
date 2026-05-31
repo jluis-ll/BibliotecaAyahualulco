@@ -1,0 +1,109 @@
+<div class="modal fade" id="modalEditarLibro" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" asp-page-handler="Editar">
+
+                    <input type="hidden" id="editarId" name="FolioLibro">
+
+                    <div class="mb-3">
+                        <label class="form-label">Título</label>
+                        <input type="text" class="form-control" id="editarNombre" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">ISBN</label>
+                        <input type="number" class="form-control" id="editarIsbn" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Número de copias</label>
+                        <input type="number" class="form-control" id="editarCopias" name="NumeroCopias" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Condición</label>
+                        <select class="form-select" id="editarCondicion" name="CondicionLibro" required>
+                            <option value="Nuevo">Nuevo</option>
+                            <option value="Bueno">Bueno</option>
+                            <option value="Usado">Usado</option>
+                            <option value="Regular">Regular</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Pasillo</label>
+                        <select class="form-select" id="editarPasillo" name="IdPasillo" required>
+                            @foreach (var pasillo in Model.Pasillos)
+                            {
+                                <option value="@pasillo.IdPasillo">
+                                    @pasillo.NomPasillo
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Piso</label>
+                        <select class="form-select" id="editarPiso" name="Piso" required>
+                            <option value="Planta Baja">Planta Baja</option>
+                            <option value="Primer Piso">Primer Piso</option>
+                            <option value="Segundo Piso">Segundo Piso</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-dark">
+                            Guardar cambios
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalEditar = document.getElementById('modalEditarLibro');
+
+    modalEditar.addEventListener('show.bs.modal', function (event) {
+        const boton = event.relatedTarget;
+
+        document.getElementById('editarId').value =
+            boton.getAttribute('data-id');
+
+        document.getElementById('editarNombre').value =
+            boton.getAttribute('data-nombre');
+
+        document.getElementById('editarIsbn').value =
+            boton.getAttribute('data-isbn');
+
+        document.getElementById('editarCopias').value =
+            boton.getAttribute('data-copias');
+
+        document.getElementById('editarCondicion').value =
+            boton.getAttribute('data-condicion');
+
+        document.getElementById('editarPasillo').value =
+            boton.getAttribute('data-pasillo');
+
+        document.getElementById('editarPiso').value =
+            boton.getAttribute('data-piso');
+    });
+</script>

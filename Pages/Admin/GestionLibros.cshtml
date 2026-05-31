@@ -45,7 +45,13 @@
                     <td>@libro.NumeroCopias</td>
 
                     <td class="acciones">
-                        <button class="editar">Editar</button>
+                        <button class="editar" data-bs-toggle="modal" data-bs-target="#modalEditarLibro"
+                                data-id="@libro.FolioLibro" data-nombre="@libro.Nombre" data-isbn="@libro.Isbn"
+                                data-copias="@libro.NumeroCopias" data-condicion="@libro.CondicionLibro"
+                                data-pasillo="@libro.IdUbicacionNavigation?.IdPasillo"
+                                data-piso="@libro.IdUbicacionNavigation?.Piso">
+                            Editar
+                        </button>
                         <button class="eliminar">Eliminar</button>
                     </td>
                 </tr>
@@ -55,138 +61,6 @@
 
 </section>
 
-<div class="modal fade" id="modalAgregarLibro" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
+<partial name="~/Pages/Modales/_ModalAgregarLibro.cshtml" model="Model" />
 
-            <div class="modal-header">
-                <h5 class="modal-title">Agregar libro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-                <form method="post">
-
-                    <div class="row">
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre del libro</label>
-                            <input type="text" class="form-control" name="Nombre" placeholder="Título del libro" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">ISBN</label>
-                            <input type="number" class="form-control" name="Isbn" placeholder="ISBN" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Condición</label>
-                            <select class="form-select" name="CondicionLibro" required>
-                                <option value="Nuevo">Nuevo</option>
-                                <option value="Bueno">Bueno</option>
-                                <option value="Usado">Usado</option>
-                                <option value="Regular">Regular</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Número de páginas</label>
-                            <input type="number" class="form-control" name="NumeroPaginas" placeholder="Páginas" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">País de publicación</label>
-                            <input type="text" class="form-control" name="PaisPublicacion" placeholder="País" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Número de copias</label>
-                            <input type="number" class="form-control" name="NumeroCopias" placeholder="Copias" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Autor existente</label>
-                            <select class="form-select" name="IdAutor">
-                                <option value="">Selecciona un autor</option>
-                                @foreach (var autor in Model.Autores)
-                                {
-                                    <option value="@autor.IdAutor">@autor.Nombre</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">O agregar nuevo autor</label>
-                            <input type="text" class="form-control" name="NuevoAutor" placeholder="Nuevo autor">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Editorial existente</label>
-                            <select class="form-select" name="IdEditorial">
-                                <option value="">Selecciona una editorial</option>
-                                @foreach (var editorial in Model.Editoriales)
-                                {
-                                    <option value="@editorial.IdEditorial">@editorial.Nombre</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">O agregar nueva editorial</label>
-                            <input type="text" class="form-control" name="NuevaEditorial" placeholder="Nueva editorial">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tema existente</label>
-                            <select class="form-select" name="IdTema">
-                                <option value="">Selecciona un tema</option>
-                                @foreach (var tema in Model.Temas)
-                                {
-                                    <option value="@tema.IdTema">@tema.NombTema</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">O agregar nuevo tema</label>
-                            <input type="text" class="form-control" name="NuevoTema" placeholder="Nuevo tema">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Pasillo</label>
-                            <select class="form-select" name="IdPasillo" required>
-                                <option value="">Selecciona un pasillo</option>
-                                @foreach (var pasillo in Model.Pasillos)
-                                {
-                                    <option value="@pasillo.IdPasillo">@pasillo.NomPasillo</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Piso</label>
-                            <select class="form-select" name="Piso" required>
-                                <option value="Planta Baja">Planta Baja</option>
-                                <option value="Primer Piso">Primer Piso</option>
-                                <option value="Segundo Piso">Segundo Piso</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer px-0 pb-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-
-                        <button type="submit" class="btn btn-dark">
-                            Guardar libro
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
+<partial name="~/Pages/Modales/_ModalEditarLibro.cshtml" model="Model" />
