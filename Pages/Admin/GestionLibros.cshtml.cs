@@ -181,4 +181,24 @@ public class GestionLibrosModel : PageModel
         return RedirectToPage();
     }
 
+    public IActionResult OnPostEliminar(int FolioLibro)
+    {
+        var libro = _context.Libros
+            .Include(l => l.IdAutors)
+            .FirstOrDefault(l => l.FolioLibro == FolioLibro);
+
+        if (libro == null)
+        {
+            return NotFound();
+        }
+
+        libro.IdAutors.Clear();
+
+        _context.Libros.Remove(libro);
+
+        _context.SaveChanges();
+
+        return RedirectToPage();
+    }
+
 }

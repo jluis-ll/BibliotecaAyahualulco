@@ -1,0 +1,75 @@
+<div class="modal fade" id="modalEliminarLibro" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Eliminar libro
+                </h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" asp-page-handler="Eliminar">
+
+                    <input type="hidden" id="eliminarId" name="FolioLibro">
+
+                    <p>
+                        ¿Seguro que deseas eliminar el libro:
+                    </p>
+
+                    <strong id="eliminarNombre"></strong>
+
+                    <div class="modal-footer mt-4">
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+
+                            Cancelar
+
+                        </button>
+
+                        <button type="submit" class="btn btn-danger">
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const modalEliminar =
+        document.getElementById('modalEliminarLibro');
+
+    modalEliminar.addEventListener(
+        'show.bs.modal',
+        function (event) {
+
+            const boton = event.relatedTarget;
+
+            document.getElementById('eliminarId').value =
+                boton.getAttribute('data-id');
+
+            document.getElementById('eliminarNombre').textContent =
+                boton.getAttribute('data-nombre');
+
+        });
+
+</script>

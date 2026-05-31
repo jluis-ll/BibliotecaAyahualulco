@@ -1,17 +1,19 @@
 ﻿@page
-@model MyApp.Namespace.GestionUsuariosModel
+@model Proyecto.Pages.Admin.GestionUsuariosModel
 @{
     ViewData["Title"] = "Gestión de usuarios";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Admin/gestionUsuarios.css" />
 }
 
 <section class="gestion-usuarios">
     <div class="encabezado">
         <h1>Gestión de usuarios</h1>
-        <button class="btn-agregar">Agregar usuario</button>
+        <button class="btn-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregarUsuario">
+            Agregar usuario
+        </button>
     </div>
 
     <div class="busqueda">
@@ -22,39 +24,48 @@
     <table class="tabla-usuarios">
         <thead>
             <tr>
-                <th>Folio</th>
+                <th>No. Socio</th>
                 <th>Nombre</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+                <th>Credencial</th>
                 <th>Teléfono</th>
-                <th>Estado</th>
-                <th>Rol</th>
                 <th>Acciones</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>FOL-001</td>
-                <td>Carlos Hernández</td>
-                <td>2281234567</td>
-                <td>Activo</td>
-                <td>Lector</td>
-                <td class="acciones">
-                    <button class="editar">Editar</button>
-                    <button class="eliminar">Eliminar</button>
-                </td>
-            </tr>
+            @foreach (var socio in Model.Socios)
+            {
+                <tr>
+                    <td>@socio.NumSocio</td>
+                    <td>@socio.NombCompleto</td>
+                    <td>@socio.CorreoElectronico</td>
+                    <td>@socio.Direccion</td>
+                    <td>@socio.MatriculaCredencialNavigation?.Numero</td>
+                    <td>@string.Join(", ", socio.Telefonos.Select(t => t.Numero))</td>
 
-            <tr>
-                <td>FOL-002</td>
-                <td>Ana López</td>
-                <td>2287654321</td>
-                <td>Suspendido</td>
-                <td>Lector</td>
-                <td class="acciones">
-                    <button class="editar">Editar</button>
-                    <button class="eliminar">Eliminar</button>
-                </td>
-            </tr>
+                    <td class="acciones">
+                        <button class="editar" data-bs-toggle="modal" data-bs-target="#modalEditarUsuario"
+                                data-id="@socio.NumSocio" data-nombre="@socio.NombCompleto"
+                                data-correo="@socio.CorreoElectronico" data-direccion="@socio.Direccion"
+                                data-telefono="@socio.Telefonos.FirstOrDefault()?.Numero"
+                                data-credencial="@socio.MatriculaCredencialNavigation?.Numero">
+                            Editar
+                        </button>
+                        <button class="eliminar" data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario"
+                                data-id="@socio.NumSocio" data-nombre="@socio.NombCompleto">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </section>
+
+<partial name="~/Pages/Modales/_ModalAgregarUsuario.cshtml" model="Model" />
+
+<partial name="~/Pages/Modales/_ModalEditarUsuario.cshtml" model="Model" />
+
+<partial name="~/Pages/Modales/_ModalEliminarUsuario.cshtml" model="Model" />

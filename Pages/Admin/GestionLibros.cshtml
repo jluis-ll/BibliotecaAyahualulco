@@ -52,7 +52,12 @@
                                 data-piso="@libro.IdUbicacionNavigation?.Piso">
                             Editar
                         </button>
-                        <button class="eliminar">Eliminar</button>
+                        <button class="eliminar" data-bs-toggle="modal" data-bs-target="#modalEliminarLibro"
+                                data-id="@libro.FolioLibro" data-nombre="@libro.Nombre">
+
+                            Eliminar
+
+                        </button>
                     </td>
                 </tr>
             }
@@ -64,3 +69,5 @@
 <partial name="~/Pages/Modales/_ModalAgregarLibro.cshtml" model="Model" />
 
 <partial name="~/Pages/Modales/_ModalEditarLibro.cshtml" model="Model" />
+
+<partial name="~/Pages/Modales/_ModalEliminarLibro.cshtml" model="Model" />

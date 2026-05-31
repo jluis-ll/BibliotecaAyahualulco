@@ -1,0 +1,89 @@
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Editar">
+
+                    <input type="hidden" id="editarIdUsuario" name="NumSocio">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="editarNombreUsuario" name="NombreCompleto"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="editarCorreoUsuario" name="CorreoElectronico"
+                                   required>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="editarDireccionUsuario" name="Direccion"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="editarTelefonoUsuario" name="Telefono" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Número de credencial</label>
+                            <input type="number" class="form-control" id="editarCredencialUsuario"
+                                   name="NumeroCredencial" required>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-dark">
+                            Guardar cambios
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalEditarUsuario = document.getElementById('modalEditarUsuario');
+
+    modalEditarUsuario.addEventListener('show.bs.modal', function (event) {
+        const boton = event.relatedTarget;
+
+        document.getElementById('editarIdUsuario').value =
+            boton.getAttribute('data-id');
+
+        document.getElementById('editarNombreUsuario').value =
+            boton.getAttribute('data-nombre');
+
+        document.getElementById('editarCorreoUsuario').value =
+            boton.getAttribute('data-correo');
+
+        document.getElementById('editarDireccionUsuario').value =
+            boton.getAttribute('data-direccion');
+
+        document.getElementById('editarTelefonoUsuario').value =
+            boton.getAttribute('data-telefono');
+
+        document.getElementById('editarCredencialUsuario').value =
+            boton.getAttribute('data-credencial');
+    });
+</script>
