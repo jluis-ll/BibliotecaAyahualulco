@@ -22,6 +22,20 @@
         <button>Buscar</button>
     </div>
 
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Exito"]
+        </div>
+    }
+
     <table class="tabla-libros">
         <thead>
             <tr>

@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto.Pages.Admin;
 
@@ -26,24 +26,19 @@ public class GestionUsuariosModel : PageModel
     }
 
     public IActionResult OnPost(
-    string NombreCompleto,
-    string CorreoElectronico,
-    string Direccion,
-    string Telefono,
-    int NumeroCredencial)
+        string NombreCompleto,
+        string CorreoElectronico,
+        string Direccion,
+        string Telefono,
+        int NumeroCredencial)
     {
-        // ===== CREDENCIAL =====
-
         var credencial = new Credencial
         {
             Numero = NumeroCredencial
         };
 
         _context.Credencials.Add(credencial);
-
         _context.SaveChanges();
-
-        // ===== SOCIO =====
 
         var socio = new Socio
         {
@@ -54,10 +49,7 @@ public class GestionUsuariosModel : PageModel
         };
 
         _context.Socios.Add(socio);
-
         _context.SaveChanges();
-
-        // ===== TELEFONO =====
 
         var telefono = new Telefono
         {
@@ -66,8 +58,9 @@ public class GestionUsuariosModel : PageModel
         };
 
         _context.Telefonos.Add(telefono);
-
         _context.SaveChanges();
+
+        TempData["Exito"] = "Usuario agregado correctamente.";
 
         return RedirectToPage();
     }
@@ -107,16 +100,16 @@ public class GestionUsuariosModel : PageModel
         }
         else
         {
-            var nuevoTelefono = new Telefono
+            _context.Telefonos.Add(new Telefono
             {
                 Numero = Telefono,
                 NumSocio = socio.NumSocio
-            };
-
-            _context.Telefonos.Add(nuevoTelefono);
+            });
         }
 
         _context.SaveChanges();
+
+        TempData["Exito"] = "Usuario actualizado correctamente.";
 
         return RedirectToPage();
     }
@@ -126,11 +119,23 @@ public class GestionUsuariosModel : PageModel
         var socio = _context.Socios
             .Include(s => s.Telefonos)
             .Include(s => s.MatriculaCredencialNavigation)
+            .Include(s => s.Prestamos)
             .FirstOrDefault(s => s.NumSocio == NumSocio);
 
         if (socio == null)
         {
             return NotFound();
+        }
+
+        var tienePrestamos = _context.Prestamos
+            .Any(p => p.NumSocio == NumSocio);
+
+        if (tienePrestamos)
+        {
+            TempData["Error"] =
+                "No se puede eliminar este usuario porque tiene préstamos registrados.";
+
+            return RedirectToPage();
         }
 
         var credencial = socio.MatriculaCredencialNavigation;
@@ -141,7 +146,6 @@ public class GestionUsuariosModel : PageModel
         }
 
         _context.Socios.Remove(socio);
-
         _context.SaveChanges();
 
         if (credencial != null)
@@ -149,6 +153,8 @@ public class GestionUsuariosModel : PageModel
             _context.Credencials.Remove(credencial);
             _context.SaveChanges();
         }
+
+        TempData["Exito"] = "Usuario eliminado correctamente.";
 
         return RedirectToPage();
     }
