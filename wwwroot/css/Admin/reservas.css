@@ -1,29 +1,29 @@
-.reservas{
+.reservas {
     padding: 40px;
 }
 
-.encabezado{
+.encabezado {
     margin-bottom: 30px;
 }
 
-.encabezado h1{
+.encabezado h1 {
     color: #1b263b;
 }
 
-.busqueda{
+.busqueda {
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
 }
 
-.busqueda input{
+.busqueda input {
     width: 350px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
 
-.busqueda button{
+.busqueda button {
     border: none;
     background-color: #1b263b;
     color: white;
@@ -32,26 +32,43 @@
     cursor: pointer;
 }
 
-.tabla-reservas{
+.tabla-reservas {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.tabla-reservas thead{
+.tabla-reservas thead {
     background-color: #1b263b;
     color: white;
 }
 
 .tabla-reservas th,
-.tabla-reservas td{
+.tabla-reservas td {
     padding: 16px;
     text-align: center;
 }
 
-.tabla-reservas tbody tr{
+.tabla-reservas tbody tr {
     border-bottom: 1px solid #ddd;
+}
+
+.btn-agregar {
+    background-color: #1f2937;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #374151;
+    transform: translateY(-2px);
 }

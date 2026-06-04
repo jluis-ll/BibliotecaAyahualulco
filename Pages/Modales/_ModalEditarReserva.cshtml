@@ -1,0 +1,62 @@
+<div class="modal fade" id="modalEditarReserva" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Editar">
+
+                    <input type="hidden" id="editarIdReserva" name="IdReserva">
+
+                    <div class="mb-3">
+                        <label class="form-label">Libro</label>
+
+                        <select class="form-select" id="editarLibroReserva" name="FolioLibro" required>
+
+                            @foreach (var libro in Model.Libros)
+                            {
+                                <option value="@libro.FolioLibro">
+                                    @libro.Nombre
+                                </option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="modal-footer px-0 pb-0">
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-dark">
+                            Guardar cambios
+                        </button>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalEditarReserva = document.getElementById('modalEditarReserva');
+
+    modalEditarReserva.addEventListener('show.bs.modal', function (event) {
+
+        const boton = event.relatedTarget;
+
+        document.getElementById('editarIdReserva').value =
+            boton.getAttribute('data-id');
+
+        document.getElementById('editarLibroReserva').value =
+            boton.getAttribute('data-libro');
+    });
+</script>

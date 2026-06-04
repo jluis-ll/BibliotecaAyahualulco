@@ -1,0 +1,50 @@
+<div class="modal fade" id="modalAgregarReserva" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Usuario</label>
+                        <select class="form-select" name="NumSocio" required>
+                            <option value="">Selecciona un usuario</option>
+                            @foreach (var socio in Model.Socios)
+                            {
+                                <option value="@socio.NumSocio">@socio.NombCompleto</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Libro</label>
+                        <select class="form-select" name="FolioLibro" required>
+                            <option value="">Selecciona un libro</option>
+                            @foreach (var libro in Model.Libros)
+                            {
+                                <option value="@libro.FolioLibro">@libro.Nombre</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-dark">
+                            Guardar reserva
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
