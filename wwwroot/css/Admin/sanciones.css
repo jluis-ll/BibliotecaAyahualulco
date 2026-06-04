@@ -59,20 +59,3 @@
 .tabla-sanciones tbody tr{
     border-bottom: 1px solid #ddd;
 }
-
-.btn-agregar {
-    background-color: #1f2937;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.btn-agregar:hover {
-    background-color: #374151;
-    transform: translateY(-2px);
-}
