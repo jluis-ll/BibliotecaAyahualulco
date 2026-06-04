@@ -1,0 +1,83 @@
+<div class="modal fade" id="modalRegistrarDevolucion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar devolución</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post">
+
+                    <input type="hidden" id="devolucionId" name="NumPrestamo">
+
+                    <p><strong>Usuario:</strong> <span id="devolucionUsuario"></span></p>
+                    <p><strong>Libro:</strong> <span id="devolucionLibro"></span></p>
+
+                    <div class="mb-3">
+                        <label class="form-label">¿Aplica sanción?</label>
+
+                        <select class="form-select" id="aplicaSancion" name="AplicaSancion">
+                            <option value="false">No, devolución normal</option>
+                            <option value="true">Sí, aplicar sanción</option>
+                        </select>
+                    </div>
+
+                    <div id="camposSancion" style="display: none;">
+
+                        <div class="mb-3">
+                            <label class="form-label">Descripción de la sanción</label>
+                            <textarea class="form-control" name="Descripcion" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Monto de sanción</label>
+                            <input type="number" class="form-control" name="MontoSancion">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha límite de pago</label>
+                            <input type="date" class="form-control" name="LimitePago">
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-dark">
+                            Confirmar devolución
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalDevolucion = document.getElementById('modalRegistrarDevolucion');
+
+    modalDevolucion.addEventListener('show.bs.modal', function (event) {
+        const boton = event.relatedTarget;
+
+        document.getElementById('devolucionId').value = boton.getAttribute('data-id');
+        document.getElementById('devolucionUsuario').textContent = boton.getAttribute('data-usuario');
+        document.getElementById('devolucionLibro').textContent = boton.getAttribute('data-libro');
+    });
+
+    document.getElementById('aplicaSancion').addEventListener('change', function () {
+        const campos = document.getElementById('camposSancion');
+
+        if (this.value === "true") {
+            campos.style.display = "block";
+        } else {
+            campos.style.display = "none";
+        }
+    });
+</script>

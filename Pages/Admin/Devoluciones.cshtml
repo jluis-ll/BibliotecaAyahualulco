@@ -47,16 +47,19 @@
                     <td>@prestamo.FechaEntrega.ToString("dd/MM/yyyy")</td>
                     <td>@prestamo.EstatusPrestamo</td>
                     <td>
-                        <form method="post">
-                            <input type="hidden" name="NumPrestamo" value="@prestamo.NumPrestamo">
+                        <button type="button" class="btn-devolver" data-bs-toggle="modal"
+                                data-bs-target="#modalRegistrarDevolucion" data-id="@prestamo.NumPrestamo"
+                                data-usuario="@prestamo.NumSocioNavigation.NombCompleto"
+                                data-libro="@prestamo.FolioLibroNavigation.Nombre">
 
-                            <button type="submit" class="btn-devolver">
-                                Registrar devolución
-                            </button>
-                        </form>
+                            Registrar devolución
+
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </section>
+
+<partial name="~/Pages/Modales/_ModalRegistrarDevolucion.cshtml" model="Model" />

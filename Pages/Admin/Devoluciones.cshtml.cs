@@ -26,7 +26,12 @@ public class DevolucionesModel : PageModel
             .ToList();
     }
 
-    public IActionResult OnPost(int NumPrestamo)
+    public IActionResult OnPost(
+    int NumPrestamo,
+    bool AplicaSancion,
+    string? Descripcion,
+    int? MontoSancion,
+    DateTime? LimitePago)
     {
         var prestamo = _context.Prestamos
             .Include(p => p.FolioLibroNavigation)
@@ -38,8 +43,21 @@ public class DevolucionesModel : PageModel
         }
 
         prestamo.EstatusPrestamo = "Entregado";
-
         prestamo.FolioLibroNavigation.NumeroCopias++;
+
+        if (AplicaSancion)
+        {
+            var sancion = new Sancion
+            {
+                NumPrestamo = NumPrestamo,
+                Descripcion = Descripcion ?? "Sanción por devolución",
+                MontoSancion = MontoSancion ?? 0,
+                LimitePago = LimitePago ?? DateTime.Now.AddDays(7),
+                IdBibliotecario = prestamo.IdBibliotecario ?? 1
+            };
+
+            _context.Sancions.Add(sancion);
+        }
 
         _context.SaveChanges();
 
