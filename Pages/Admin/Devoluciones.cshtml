@@ -1,10 +1,10 @@
 ﻿@page
-@model MyApp.Namespace.DevolucionesModel
+@model Proyecto.Pages.Admin.DevolucionesModel
 @{
     ViewData["Title"] = "Devoluciones";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Admin/devoluciones.css" />
 }
 
@@ -18,40 +18,48 @@
         <button>Buscar</button>
     </div>
 
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-success mt-3">
+            @TempData["Exito"]
+        </div>
+    }
+
     <table class="tabla-devoluciones">
         <thead>
             <tr>
-                <th>Folio</th>
+                <th>No. Préstamo</th>
                 <th>Usuario</th>
                 <th>Libro</th>
-                <th>Fecha devolución</th>
+                <th>Fecha entrega</th>
                 <th>Estado</th>
                 <th>Acción</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>FOL-001</td>
-                <td>Carlos Hernández</td>
-                <td>El Principito</td>
-                <td>04/06/2026</td>
-                <td>Activo</td>
-                <td>
-                    <button class="btn-devolver">Registrar devolución</button>
-                </td>
-            </tr>
+            @foreach (var prestamo in Model.Prestamos)
+            {
+                <tr>
+                    <td>@prestamo.NumPrestamo</td>
+                    <td>@prestamo.NumSocioNavigation.NombCompleto</td>
+                    <td>@prestamo.FolioLibroNavigation.Nombre</td>
+                    <td>@prestamo.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                    <td>@prestamo.EstatusPrestamo</td>
+                    <td>
+                        <button type="button" class="btn-devolver" data-bs-toggle="modal"
+                                data-bs-target="#modalRegistrarDevolucion" data-id="@prestamo.NumPrestamo"
+                                data-usuario="@prestamo.NumSocioNavigation.NombCompleto"
+                                data-libro="@prestamo.FolioLibroNavigation.Nombre">
 
-            <tr>
-                <td>FOL-002</td>
-                <td>Ana López</td>
-                <td>Don Quijote</td>
-                <td>27/05/2026</td>
-                <td>Atrasado</td>
-                <td>
-                    <button class="btn-devolver">Registrar devolución</button>
-                </td>
-            </tr>
+                            Registrar devolución
+
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </section>
+
+<partial name="~/Pages/Modales/_ModalRegistrarDevolucion.cshtml" model="Model" />

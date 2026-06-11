@@ -37,6 +37,7 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<Tema> Temas { get; set; }
 
     public virtual DbSet<Ubicacion> Ubicacions { get; set; }
+    public virtual DbSet<Reserva> Reservas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -329,6 +330,37 @@ public partial class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_ubicacion_tema");
         });
+
+        modelBuilder.Entity<Reserva>(entity =>
+{
+    entity.HasKey(e => e.IdReserva).HasName("PRIMARY");
+
+    entity.ToTable("reserva");
+
+    entity.HasIndex(e => e.FolioLibro, "folioLibro");
+
+    entity.HasIndex(e => e.NumSocio, "numSocio");
+
+    entity.Property(e => e.IdReserva).HasColumnName("idReserva");
+
+    entity.Property(e => e.NumSocio).HasColumnName("numSocio");
+
+    entity.Property(e => e.FolioLibro).HasColumnName("folioLibro");
+
+    entity.Property(e => e.FechaReserva)
+        .HasColumnType("date")
+        .HasColumnName("fechaReserva");
+
+    entity.HasOne(d => d.FolioLibroNavigation).WithMany()
+        .HasForeignKey(d => d.FolioLibro)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_reserva_libro");
+
+    entity.HasOne(d => d.NumSocioNavigation).WithMany()
+        .HasForeignKey(d => d.NumSocio)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_reserva_socio");
+});
 
         OnModelCreatingPartial(modelBuilder);
     }

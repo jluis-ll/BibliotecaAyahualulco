@@ -1,0 +1,59 @@
+<div class="modal fade" id="modalEliminarReserva" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Eliminar">
+
+                    <input type="hidden" id="eliminarIdReserva" name="IdReserva">
+
+                    <p>¿Seguro que deseas eliminar esta reserva?</p>
+
+                    <p>
+                        <strong>Usuario:</strong>
+                        <span id="eliminarUsuarioReserva"></span>
+                    </p>
+
+                    <p>
+                        <strong>Libro:</strong>
+                        <span id="eliminarLibroReserva"></span>
+                    </p>
+
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalEliminarReserva = document.getElementById('modalEliminarReserva');
+
+    modalEliminarReserva.addEventListener('show.bs.modal', function (event) {
+        const boton = event.relatedTarget;
+
+        document.getElementById('eliminarIdReserva').value =
+            boton.getAttribute('data-id');
+
+        document.getElementById('eliminarUsuarioReserva').textContent =
+            boton.getAttribute('data-usuario');
+
+        document.getElementById('eliminarLibroReserva').textContent =
+            boton.getAttribute('data-libro');
+    });
+</script>

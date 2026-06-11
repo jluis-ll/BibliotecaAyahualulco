@@ -192,11 +192,29 @@ public class GestionLibrosModel : PageModel
             return NotFound();
         }
 
+        // ===== VALIDAR PRESTAMOS =====
+
+        var tienePrestamos = _context.Prestamos
+            .Any(p => p.FolioLibro == FolioLibro);
+
+        if (tienePrestamos)
+        {
+            TempData["Error"] =
+                "No se puede eliminar este libro porque tiene préstamos registrados.";
+
+            return RedirectToPage();
+        }
+
+        // ===== ELIMINAR =====
+
         libro.IdAutors.Clear();
 
         _context.Libros.Remove(libro);
 
         _context.SaveChanges();
+
+        TempData["Exito"] =
+            "Libro eliminado correctamente.";
 
         return RedirectToPage();
     }

@@ -1,16 +1,19 @@
 ﻿@page
-@model MyApp.Namespace.ReservasModel
+@model Proyecto.Pages.Admin.ReservasModel
 @{
     ViewData["Title"] = "Reservas";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Admin/reservas.css" />
 }
 
 <section class="reservas">
     <div class="encabezado">
         <h1>Reservas</h1>
+        <button class="btn-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregarReserva">
+            Agregar reserva
+        </button>
     </div>
 
     <div class="busqueda">
@@ -18,27 +21,51 @@
         <button>Buscar</button>
     </div>
 
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-success mt-3">
+            @TempData["Exito"]
+        </div>
+    }
+
     <table class="tabla-reservas">
         <thead>
             <tr>
-                <th>Folio</th>
+                <th>ID Reserva</th>
                 <th>Usuario</th>
                 <th>Libro</th>
                 <th>Fecha reserva</th>
-                <th>Posición</th>
-                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>FOL-003</td>
-                <td>Luis Martínez</td>
-                <td>Don Quijote</td>
-                <td>29/05/2026</td>
-                <td>1</td>
-                <td>En espera</td>
-            </tr>
+            @foreach (var reserva in Model.Reservas)
+            {
+                <tr>
+                    <td>@reserva.IdReserva</td>
+                    <td>@reserva.NumSocioNavigation.NombCompleto</td>
+                    <td>@reserva.FolioLibroNavigation.Nombre</td>
+                    <td>@reserva.FechaReserva.ToString("dd/MM/yyyy")</td>
+                    <td class="accciones">
+                        <button type="button" class="editar" data-bs-toggle="modal" data-bs-target="#modalEditarReserva"
+                                data-id="@reserva.IdReserva" data-libro="@reserva.FolioLibro">
+                            Editar
+                        </button>
+                        <button type="button" class="eliminar" data-bs-toggle="modal" data-bs-target="#modalEliminarReserva"
+                                data-id="@reserva.IdReserva" data-usuario="@reserva.NumSocioNavigation.NombCompleto"
+                                data-libro="@reserva.FolioLibroNavigation.Nombre">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </section>
+
+<partial name="~/Pages/Modales/_ModalAgregarReserva.cshtml" model="Model" />
+
+<partial name="~/Pages/Modales/_ModalEliminarReserva.cshtml" model="Model" />
+
+<partial name="~/Pages/Modales/_ModalEditarReserva.cshtml" model="Model" />

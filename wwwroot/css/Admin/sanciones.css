@@ -2,8 +2,11 @@
     padding: 40px;
 }
 
-.encabezado{
-    margin-bottom: 30px;
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .encabezado h1{
