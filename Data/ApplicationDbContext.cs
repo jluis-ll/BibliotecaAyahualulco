@@ -66,6 +66,10 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(100)
                 .HasColumnName("nombre");
+
+            entity.Property(e => e.Contrasena)
+                .HasMaxLength(100)
+                .HasColumnName("contrasena");
         });
 
         modelBuilder.Entity<CopiaLibro>(entity =>
@@ -264,6 +268,10 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.NombCompleto)
                 .HasMaxLength(100)
                 .HasColumnName("nombCompleto");
+
+            entity.Property(e => e.Contrasena)
+                .HasMaxLength(100)
+                .HasColumnName("contrasena");
 
             entity.HasOne(d => d.MatriculaCredencialNavigation).WithMany(p => p.Socios)
                 .HasForeignKey(d => d.MatriculaCredencial)

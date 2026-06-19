@@ -5,6 +5,7 @@ namespace Proyecto.Models;
 
 public partial class Bibliotecario
 {
+    public string Contrasena { get; set; } = null!;
     public int IdBibliotecario { get; set; }
 
     public string Nombre { get; set; } = null!;

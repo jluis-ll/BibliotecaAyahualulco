@@ -8,6 +8,8 @@ namespace Proyecto.Pages.Admin;
 
 public class GestionLibrosModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public string Buscar { get; set; } = string.Empty;
 
     public IList<Autor> Autores { get; set; } = new List<Autor>();
     public IList<Editorial> Editoriales { get; set; } = new List<Editorial>();
@@ -24,11 +26,23 @@ public class GestionLibrosModel : PageModel
 
     public void OnGet()
     {
-        Libros = _context.Libros
-            .Include(l => l.IdEditorialNavigation)
-            .Include(l => l.IdAutors)
-            .Include(l => l.IdUbicacionNavigation)
-            .ToList();
+        var consulta = _context.Libros
+    .Include(l => l.IdEditorialNavigation)
+    .Include(l => l.IdAutors)
+    .Include(l => l.IdUbicacionNavigation)
+    .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(Buscar))
+        {
+            consulta = consulta.Where(l =>
+                l.Nombre.Contains(Buscar) ||
+                l.Isbn.ToString().Contains(Buscar) ||
+                l.PaisPublicacion.Contains(Buscar) ||
+                l.IdAutors.Any(a => a.Nombre.Contains(Buscar))
+            );
+        }
+
+        Libros = consulta.ToList();
 
         Autores = _context.Autors.ToList();
         Editoriales = _context.Editorials.ToList();

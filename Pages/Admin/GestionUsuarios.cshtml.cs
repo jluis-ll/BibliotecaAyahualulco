@@ -8,6 +8,8 @@ namespace Proyecto.Pages.Admin;
 
 public class GestionUsuariosModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public string Buscar { get; set; } = string.Empty;
     private readonly ApplicationDbContext _context;
 
     public GestionUsuariosModel(ApplicationDbContext context)
@@ -19,10 +21,21 @@ public class GestionUsuariosModel : PageModel
 
     public void OnGet()
     {
-        Socios = _context.Socios
+        var consulta = _context.Socios
             .Include(s => s.MatriculaCredencialNavigation)
             .Include(s => s.Telefonos)
-            .ToList();
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(Buscar))
+        {
+            consulta = consulta.Where(s =>
+                s.NombCompleto.Contains(Buscar) ||
+                s.NumSocio.ToString().Contains(Buscar) ||
+                s.CorreoElectronico.Contains(Buscar) ||
+                s.Telefonos.Any(t => t.Numero.Contains(Buscar)));
+        }
+
+        Socios = consulta.ToList();
     }
 
     public IActionResult OnPost(

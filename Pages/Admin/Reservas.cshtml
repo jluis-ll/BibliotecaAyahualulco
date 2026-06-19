@@ -16,15 +16,27 @@
         </button>
     </div>
 
-    <div class="busqueda">
-        <input type="text" placeholder="Buscar reserva por usuario o libro">
-        <button>Buscar</button>
-    </div>
+    <form method="get" class="busqueda">
+
+        <input type="text" name="Buscar" value="@Model.Buscar" placeholder="Buscar por usuario o libro">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
 
     @if (TempData["Exito"] != null)
     {
         <div class="alert alert-success mt-3">
             @TempData["Exito"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @TempData["Error"]
         </div>
     }
 
