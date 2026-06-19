@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ContraseÑa12
+      MYSQL_DATABASE: proyectobiblioteca
+    volumes:
+      - ./BibliotecaAyahualulco.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=server=db;port=3306;database=proyectobiblioteca;user=root;password=ContraseÑa12
+    depends_on:
+      - db
