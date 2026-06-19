@@ -3,12 +3,11 @@
 @{
     ViewData["Title"] = "Préstamos";
 }
-
 @section Styles {
     <link rel="stylesheet" href="~/css/Admin/prestamos.css" />
 }
 
-<section class="prestamos">
+<div class="prestamos">
 
     <div class="encabezado">
         <h1>Préstamos</h1>
@@ -17,129 +16,113 @@
     <form method="post" class="formulario-prestamo">
 
         <div class="campo">
-
             <label>Usuario</label>
-
             <select name="NumSocio" required>
-
-                <option value="">
-                    Selecciona un usuario
-                </option>
-
+                <option value="">Selecciona un usuario</option>
                 @foreach (var socio in Model.Socios)
                 {
                     <option value="@socio.NumSocio">
                         @socio.NombCompleto
                     </option>
                 }
-
             </select>
-
         </div>
 
         <div class="campo">
-
             <label>Libro</label>
-
             <select name="FolioLibro" required>
-
-                <option value="">
-                    Selecciona un libro
-                </option>
-
+                <option value="">Selecciona un libro</option>
                 @foreach (var libro in Model.Libros)
                 {
                     <option value="@libro.FolioLibro">
                         @libro.Nombre - Copias: @libro.NumeroCopias
                     </option>
                 }
-
             </select>
-
         </div>
 
         <div class="campo">
-
             <label>Bibliotecario</label>
-
             <select name="IdBibliotecario">
-
-                <option value="">
-                    Selecciona un bibliotecario
-                </option>
-
+                <option value="">Sin asignar</option>
                 @foreach (var b in Model.Bibliotecarios)
                 {
                     <option value="@b.IdBibliotecario">
                         @b.Nombre
                     </option>
                 }
-
             </select>
-
         </div>
 
         <div class="campo">
-
             <label>Fecha de devolución</label>
-
-            <input type="date" name="FechaEntrega" required>
-
+            <input type="date" name="FechaEntrega" required />
         </div>
 
         <button type="submit" class="btn-registrar">
-
             Registrar préstamo
-
         </button>
 
     </form>
 
+    <!-- MENSAJES -->
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger mt-3">
-            @TempData["Error"]
-        </div>
+        <p style="color:red;">@TempData["Error"]</p>
     }
 
     @if (TempData["Exito"] != null)
     {
-        <div class="alert alert-success mt-3">
-            @TempData["Exito"]
-        </div>
+        <p style="color:green;">@TempData["Exito"]</p>
     }
 
-    <div class="tabla-contenedor">
+    <!-- TABLA -->
+    <table class="tabla-prestamos">
+        <thead>
+            <tr>
+                <th>No. Préstamo</th>
+                <th>Usuario</th>
+                <th>Libro</th>
+                <th>Fecha préstamo</th>
+                <th>Fecha entrega</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
 
-        <table class="tabla-prestamos">
-
-            <thead>
+        <tbody>
+            @foreach (var prestamo in Model.Prestamos)
+            {
                 <tr>
-                    <th>No. Préstamo</th>
-                    <th>Usuario</th>
-                    <th>Libro</th>
-                    <th>Fecha préstamo</th>
-                    <th>Fecha entrega</th>
-                    <th>Estado</th>
+                    <td>@prestamo.NumPrestamo</td>
+                    <td>@prestamo.NumSocioNavigation.NombCompleto</td>
+                    <td>@prestamo.FolioLibroNavigation.Nombre</td>
+                    <td>@prestamo.FechaInicio.ToString("dd/MM/yyyy")</td>
+
+                    <td>
+                        @(prestamo.FechaEntrega != null
+                            ? prestamo.FechaEntrega.Value.ToString("dd/MM/yyyy")
+                            : "-")
+                    </td>
+
+                    <td>@prestamo.EstatusPrestamo</td>
+
+                    <td>
+                        @if (prestamo.EstatusPrestamo == "Prestado")
+                        {
+                            <form method="post" asp-page-handler="Devolver">
+                                <input type="hidden" name="NumPrestamo" value="@prestamo.NumPrestamo" />
+                                <button type="submit" class="btn-registrar">Devolver</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span style="color:green;">Devuelto</span>
+                        }
+                    </td>
                 </tr>
-            </thead>
+            }
+        </tbody>
+    </table>
 
-            <tbody>
-                @foreach (var prestamo in Model.Prestamos)
-                {
-                    <tr>
-                        <td>@prestamo.NumPrestamo</td>
-                        <td>@prestamo.NumSocioNavigation.NombCompleto</td>
-                        <td>@prestamo.FolioLibroNavigation.Nombre</td>
-                        <td>@prestamo.FechaInicio.ToString("dd/MM/yyyy")</td>
-                        <td>@prestamo.FechaEntrega.ToString("dd/MM/yyyy")</td>
-                        <td>@prestamo.EstatusPrestamo</td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-
-    </div>
-
-</section>
+</div>

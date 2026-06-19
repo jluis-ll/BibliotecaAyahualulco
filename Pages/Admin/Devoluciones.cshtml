@@ -13,10 +13,15 @@
         <h1>Devoluciones</h1>
     </div>
 
-    <div class="busqueda">
-        <input type="text" placeholder="Buscar préstamo por folio o usuario">
-        <button>Buscar</button>
-    </div>
+    <form method="get" class="busqueda">
+
+        <input type="text" name="Buscar" value="@Model.Buscar" placeholder="Buscar préstamo, usuario o libro">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
 
     @if (TempData["Exito"] != null)
     {
@@ -44,7 +49,11 @@
                     <td>@prestamo.NumPrestamo</td>
                     <td>@prestamo.NumSocioNavigation.NombCompleto</td>
                     <td>@prestamo.FolioLibroNavigation.Nombre</td>
-                    <td>@prestamo.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @(prestamo.FechaEntrega.HasValue
+                            ? prestamo.FechaEntrega.Value.ToShortDateString()
+                            : "-")
+                    </td>
                     <td>@prestamo.EstatusPrestamo</td>
                     <td>
                         <button type="button" class="btn-devolver" data-bs-toggle="modal"

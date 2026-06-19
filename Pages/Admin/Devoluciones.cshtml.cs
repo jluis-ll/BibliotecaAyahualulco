@@ -8,6 +8,8 @@ namespace Proyecto.Pages.Admin;
 
 public class DevolucionesModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public string Buscar { get; set; } = string.Empty;
     private readonly ApplicationDbContext _context;
 
     public DevolucionesModel(ApplicationDbContext context)
@@ -19,11 +21,21 @@ public class DevolucionesModel : PageModel
 
     public void OnGet()
     {
-        Prestamos = _context.Prestamos
+        var consulta = _context.Prestamos
             .Include(p => p.FolioLibroNavigation)
             .Include(p => p.NumSocioNavigation)
             .Where(p => p.EstatusPrestamo != "Entregado")
-            .ToList();
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(Buscar))
+        {
+            consulta = consulta.Where(p =>
+                p.NumPrestamo.ToString().Contains(Buscar) ||
+                p.NumSocioNavigation.NombCompleto.Contains(Buscar) ||
+                p.FolioLibroNavigation.Nombre.Contains(Buscar));
+        }
+
+        Prestamos = consulta.ToList();
     }
 
     public IActionResult OnPost(

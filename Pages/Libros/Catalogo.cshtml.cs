@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Proyecto.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto.Pages.Libros;
 
 public class CatalogoModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public string Buscar { get; set; } = string.Empty;
     private readonly ApplicationDbContext _context;
 
     public CatalogoModel(ApplicationDbContext context)
@@ -17,6 +20,18 @@ public class CatalogoModel : PageModel
 
     public void OnGet()
     {
-        Libros = _context.Libros.ToList();
+        var consulta = _context.Libros.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(Buscar))
+        {
+            consulta = consulta.Where(l =>
+                l.Nombre.Contains(Buscar) ||
+                l.PaisPublicacion.Contains(Buscar) ||
+                l.Isbn.ToString().Contains(Buscar) ||
+                l.IdAutors.Any(a => a.Nombre.Contains(Buscar))
+            );
+        }
+
+        Libros = consulta.ToList();
     }
 }

@@ -17,10 +17,15 @@
         </button>
     </div>
 
-    <div class="busqueda">
-        <input type="text" placeholder="Buscar libro">
-        <button>Buscar</button>
-    </div>
+    <form method="get" class="busqueda">
+
+        <input type="text" name="Buscar" value="@Model.Buscar" placeholder="Buscar libro por título, ISBN o autor">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
 
     @if (TempData["Error"] != null)
     {

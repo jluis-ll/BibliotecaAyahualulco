@@ -12,10 +12,15 @@
     <div class="encabezado">
         <h1>Sanciones</h1>
     </div>
-    <div class="busqueda">
-        <input type="text" placeholder="Buscar usuario sancionado">
-        <button>Buscar</button>
-    </div>
+    <form method="get" class="busqueda">
+
+        <input type="text" name="Buscar" value="@Model.Buscar" placeholder="Buscar usuario, folio, libro o descripción">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
     <table class="tabla-sanciones">
         <thead>
             <tr>

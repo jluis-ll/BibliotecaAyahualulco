@@ -19,10 +19,15 @@
         <p>Consulta los libros disponibles en la biblioteca.</p>
     </div>
 
-    <div class="filtros">
-        <input type="text" placeholder="Buscar por título, autor o categoría">
-        <button>Buscar</button>
-    </div>
+    <form method="get" class="filtros">
+
+        <input type="text" name="Buscar" value="@Model.Buscar" placeholder="Buscar por título, ISBN, País o Autor">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
 
     <div class="contenedor-catalogo">
 

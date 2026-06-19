@@ -8,6 +8,8 @@ namespace Proyecto.Pages.Admin;
 
 public class SancionesModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public string Buscar { get; set; } = string.Empty;
     public IList<Prestamo> Prestamos { get; set; } = new List<Prestamo>();
     private readonly ApplicationDbContext _context;
 
@@ -20,12 +22,23 @@ public class SancionesModel : PageModel
 
     public void OnGet()
     {
-        Sanciones = _context.Sancions
-            .Include(s => s.NumPrestamoNavigation)
-                .ThenInclude(p => p.NumSocioNavigation)
-            .Include(s => s.NumPrestamoNavigation)
-                .ThenInclude(p => p.FolioLibroNavigation)
-            .ToList();
+        var consulta = _context.Sancions
+    .Include(s => s.NumPrestamoNavigation)
+        .ThenInclude(p => p.NumSocioNavigation)
+    .Include(s => s.NumPrestamoNavigation)
+        .ThenInclude(p => p.FolioLibroNavigation)
+    .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(Buscar))
+        {
+            consulta = consulta.Where(s =>
+                s.Folio.ToString().Contains(Buscar) ||
+                s.NumPrestamoNavigation.NumSocioNavigation.NombCompleto.Contains(Buscar) ||
+                s.NumPrestamoNavigation.FolioLibroNavigation.Nombre.Contains(Buscar) ||
+                s.Descripcion.Contains(Buscar));
+        }
+
+        Sanciones = consulta.ToList();
 
         Prestamos = _context.Prestamos
             .Include(p => p.NumSocioNavigation)

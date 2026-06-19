@@ -9,7 +9,7 @@ public partial class Prestamo
 
     public DateTime FechaInicio { get; set; }
 
-    public DateTime FechaEntrega { get; set; }
+    public DateTime? FechaEntrega { get; set; }
 
     public string EstatusPrestamo { get; set; } = null!;
 
@@ -20,10 +20,7 @@ public partial class Prestamo
     public int? IdBibliotecario { get; set; }
 
     public virtual Libro FolioLibroNavigation { get; set; } = null!;
-
-    public virtual Bibliotecario? IdBibliotecarioNavigation { get; set; }
-
     public virtual Socio NumSocioNavigation { get; set; } = null!;
-
+    public virtual Bibliotecario? IdBibliotecarioNavigation { get; set; }
     public virtual ICollection<Sancion> Sancions { get; set; } = new List<Sancion>();
 }
