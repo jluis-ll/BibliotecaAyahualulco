@@ -5,6 +5,7 @@ namespace Proyecto.Models;
 
 public partial class Socio
 {
+    public string Contrasena { get; set; } = null!;
     public int NumSocio { get; set; }
 
     public string NombCompleto { get; set; } = null!;
