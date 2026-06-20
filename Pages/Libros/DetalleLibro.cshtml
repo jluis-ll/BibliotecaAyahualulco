@@ -5,7 +5,7 @@
     ViewData["Title"] = "Detalle del libro";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Libros/detalleLibro.css" />
 }
 
@@ -37,9 +37,22 @@
             <p><strong>Pasillo:</strong> @Model.Libro.IdUbicacionNavigation.IdPasilloNavigation.NomPasillo</p>
             <p><strong>Piso:</strong> @Model.Libro.IdUbicacionNavigation.Piso</p>
 
+            @{
+                bool autenticado = HttpContext.Session.GetString("SocioId") != null;
+                string returnUrl = Uri.EscapeDataString(Request.Path + Request.QueryString);
+            }
+
             <div class="acciones">
-                <button class="btn-prestamo">Solicitar préstamo</button>
-                <button class="btn-reserva">Reservar libro</button>
+                @if (autenticado)
+                {
+                    <button class="btn-prestamo">Solicitar préstamo</button>
+                    <button class="btn-reserva">Reservar libro</button>
+                }
+                else
+                {
+                    <a href="/Auth/Login?returnUrl=@returnUrl" class="btn-prestamo">Solicitar préstamo</a>
+                    <a href="/Auth/Login?returnUrl=@returnUrl" class="btn-reserva">Reservar libro</a>
+                }
             </div>
         </div>
 

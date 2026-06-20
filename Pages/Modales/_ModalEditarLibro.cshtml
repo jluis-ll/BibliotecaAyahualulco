@@ -12,6 +12,7 @@
             <div class="modal-body">
 
                 <form method="post" asp-page-handler="Editar">
+                    @Html.AntiForgeryToken()
 
                     <input type="hidden" id="editarId" name="FolioLibro">
 

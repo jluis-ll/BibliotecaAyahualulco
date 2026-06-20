@@ -33,6 +33,10 @@ a{
     align-items: center;
     padding: 15px 40px;
 }
+.nav-usuario {
+    color: white;
+    font-weight: bold;
+}
 
 .logo a{
     color: white;
