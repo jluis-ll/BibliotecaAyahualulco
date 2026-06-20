@@ -30,6 +30,8 @@
         @if (HttpContext.Session.GetString("AdminId") != null)
         {
             <a asp-page="/Admin/PanelAdmin" class="boton">Panel administrativo</a>
+
+
         }
         else if (HttpContext.Session.GetString("SocioId") == null)
         {
