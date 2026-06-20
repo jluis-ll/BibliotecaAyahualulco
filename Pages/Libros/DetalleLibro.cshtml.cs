@@ -37,4 +37,107 @@ public class DetalleLibroModel : PageModel
 
         return Page();
     }
+
+    public IActionResult OnPostReservar(int FolioLibro)
+    {
+        int numSocioPrueba = 1;
+
+        var libro = _context.Libros
+            .FirstOrDefault(l => l.FolioLibro == FolioLibro);
+
+        if (libro == null)
+        {
+            return NotFound();
+        }
+
+        if (libro.NumeroCopias > 0)
+        {
+            TempData["Error"] =
+                "Este libro tiene copias disponibles, puedes solicitar préstamo.";
+
+            return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+        }
+
+        var reservaExistente = _context.Reservas
+            .Any(r => r.NumSocio == numSocioPrueba &&
+                      r.FolioLibro == FolioLibro);
+
+        if (reservaExistente)
+        {
+            TempData["Error"] =
+                "Ya tienes una reserva registrada para este libro.";
+
+            return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+        }
+
+        var reserva = new Reserva
+        {
+            NumSocio = numSocioPrueba,
+            FolioLibro = FolioLibro,
+            FechaReserva = DateTime.Now
+        };
+
+        _context.Reservas.Add(reserva);
+        _context.SaveChanges();
+
+        TempData["Exito"] =
+            "Reserva registrada correctamente.";
+
+        return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+    }
+
+    public IActionResult OnPostSolicitarPrestamo(int FolioLibro)
+    {
+        int numSocioPrueba = 1;
+
+        var libro = _context.Libros
+            .FirstOrDefault(l => l.FolioLibro == FolioLibro);
+
+        if (libro == null)
+        {
+            return NotFound();
+        }
+
+        if (libro.NumeroCopias <= 0)
+        {
+            TempData["Error"] =
+                "No hay copias disponibles. Puedes reservar este libro.";
+
+            return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+        }
+
+        var prestamoExistente = _context.Prestamos
+            .Any(p => p.NumSocio == numSocioPrueba &&
+                      p.FolioLibro == FolioLibro &&
+                      p.EstatusPrestamo != "Entregado");
+
+        if (prestamoExistente)
+        {
+            TempData["Error"] =
+                "Ya tienes una solicitud o préstamo activo para este libro.";
+
+            return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+        }
+
+        var prestamo = new Prestamo
+        {
+            NumSocio = numSocioPrueba,
+            FolioLibro = FolioLibro,
+            FechaInicio = DateTime.Now,
+            FechaEntrega = DateTime.Now.AddDays(7),
+            EstatusPrestamo = "Solicitado",
+            IdBibliotecario = null
+        };
+
+        _context.Prestamos.Add(prestamo);
+
+        libro.NumeroCopias--;
+
+        _context.SaveChanges();
+
+        TempData["Exito"] =
+            "Solicitud de préstamo registrada correctamente.";
+
+        return RedirectToPage("/Libros/DetalleLibro", new { id = FolioLibro });
+    }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Inicio";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/inicio.css" />
 }
 
@@ -14,10 +14,15 @@
         <p>Consulta libros, revisa disponibilidad y gestiona préstamos de manera sencilla.</p>
     </div>
 
-    <div class="busqueda">
-        <input type="text" placeholder="Buscar libro por título, autor o categoría">
-        <button>Buscar</button>
-    </div>
+    <form method="get" asp-page="/Libros/Catalogo" class="busqueda">
+
+        <input type="text" name="Buscar" placeholder="Buscar libro por título, autor o categoría">
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
 
     <div class="accesos">
         <a asp-page="/Libros/Catalogo" class="boton">Catálogo</a>
@@ -30,26 +35,22 @@
         <h2>Libros populares</h2>
 
         <div class="contenedor-libros">
-            <div class="libro">
-                <img src="~/img/libro1.jpg" alt="Portada del libro">
-                <h3>El Principito</h3>
-                <p>Antoine de Saint-Exupéry</p>
-                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
-            </div>
+            @foreach (var item in Model.LibrosPopulares)
+            {
+                <div class="libro">
+                    <img src="~/img/libro1.jpg" alt="Portada del libro">
 
-            <div class="libro">
-                <img src="~/img/libro2.jpg" alt="Portada del libro">
-                <h3>Cien años de soledad</h3>
-                <p>Gabriel García Márquez</p>
-                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
-            </div>
+                    <h3>@item.Libro.Nombre</h3>
 
-            <div class="libro">
-                <img src="~/img/libro3.jpg" alt="Portada del libro">
-                <h3>Don Quijote de la Mancha</h3>
-                <p>Miguel de Cervantes</p>
-                <a asp-page="/DetalleLibro" class="boton-secundario">Ver detalle</a>
-            </div>
+                    <p>
+                        Popularidad: @item.TotalMovimientos
+                    </p>
+
+                    <a asp-page="/Libros/DetalleLibro" asp-route-id="@item.Libro.FolioLibro" class="boton-secundario">
+                        Ver detalle
+                    </a>
+                </div>
+            }
         </div>
     </section>
 </section>

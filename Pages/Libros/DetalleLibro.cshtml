@@ -5,7 +5,7 @@
     ViewData["Title"] = "Detalle del libro";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Libros/detalleLibro.css" />
 }
 
@@ -38,8 +38,35 @@
             <p><strong>Piso:</strong> @Model.Libro.IdUbicacionNavigation.Piso</p>
 
             <div class="acciones">
-                <button class="btn-prestamo">Solicitar préstamo</button>
-                <button class="btn-reserva">Reservar libro</button>
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @TempData["Error"]
+                    </div>
+                }
+
+                @if (TempData["Exito"] != null)
+                {
+                    <div class="alert alert-success mt-3">
+                        @TempData["Exito"]
+                    </div>
+                }
+                <form method="post" asp-page-handler="SolicitarPrestamo">
+                    <input type="hidden" name="FolioLibro" value="@Model.Libro.FolioLibro" />
+
+                    <button type="submit" class="btn-prestamo">
+                        Solicitar préstamo
+                    </button>
+                </form>
+
+                <form method="post" asp-page-handler="Reservar">
+                    <input type="hidden" name="FolioLibro" value="@Model.Libro.FolioLibro" />
+
+                    <button type="submit" class="btn-reserva">
+                        Reservar libro
+                    </button>
+                </form>
             </div>
         </div>
 
