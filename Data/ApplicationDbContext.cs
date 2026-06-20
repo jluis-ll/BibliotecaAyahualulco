@@ -69,7 +69,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.Contrasena)
                 .HasMaxLength(100)
-                .HasColumnName("Contraseña");
+                .HasColumnName("Contrasena");
         });
 
         modelBuilder.Entity<CopiaLibro>(entity =>
@@ -271,7 +271,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.Contrasena)
                 .HasMaxLength(100)
-                .HasColumnName("Contraseña");
+                .HasColumnName("Contrasena");
 
             entity.HasOne(d => d.MatriculaCredencialNavigation).WithMany(p => p.Socios)
                 .HasForeignKey(d => d.MatriculaCredencial)
