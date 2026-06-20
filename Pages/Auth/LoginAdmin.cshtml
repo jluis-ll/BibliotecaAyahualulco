@@ -1,7 +1,7 @@
-﻿@page
-@model MyApp.Namespace.LoginModel
+@page
+@model MyApp.Namespace.LoginAdminModel
 @{
-    ViewData["Title"] = "Iniciar sesión";
+    ViewData["Title"] = "Acceso Bibliotecario";
 }
 
 @section Styles{
@@ -10,15 +10,13 @@
 
 <section class="login">
     <div class="contenedor-login">
-        <h1>Iniciar sesión</h1>
-        <p>Accede con tu correo y contraseña.</p>
+        <h1>Acceso Bibliotecario</h1>
+        <p>Ingresa con tus credenciales de administrador.</p>
 
         <form method="post">
-            <input type="hidden" name="returnUrl" value="@Request.Query["returnUrl"]" />
-
             <div class="campo">
                 <label>Correo</label>
-                <input type="text" name="correo" placeholder="Ejemplo: usuario@gmail.com">
+                <input type="text" name="correo" placeholder="correo@biblioteca.com">
             </div>
 
             <div class="campo">
@@ -33,10 +31,5 @@
 
             <button type="submit" class="btn-login">Entrar</button>
         </form>
-
-        <p class="texto-registro">
-            ¿No tienes cuenta?
-            <a asp-page="/Auth/Registro">Regístrate aquí</a>
-        </p>
     </div>
 </section>

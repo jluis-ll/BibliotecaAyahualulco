@@ -33,6 +33,10 @@ a{
     align-items: center;
     padding: 15px 40px;
 }
+.nav-usuario {
+    color: white;
+    font-weight: bold;
+}
 
 .logo a{
     color: white;
@@ -55,4 +59,10 @@ a{
 
 .nav-links a:hover{
     color: #cbd5e1;
+}
+
+.usuario-menu{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }

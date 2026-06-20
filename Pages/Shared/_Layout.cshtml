@@ -22,9 +22,27 @@
             <div class="nav-links">
                 <a asp-page="/Index">Inicio</a>
                 <a asp-page="/Libros/Catalogo">Catálogo</a>
-                <a asp-page="/Auth/Login">Login</a>
-                <a asp-page="/Auth/Registro">Registro</a>
-                <a asp-page="/Admin/PanelAdmin">Panel administrativo</a>
+
+                @if (Context.Session.GetString("AdminId") != null)
+                {
+                    <div class="usuario-menu">
+                        <span class="nav-usuario">🔑 @Context.Session.GetString("AdminNombre")</span>
+                        <a asp-page="/Auth/LogoutAdmin">Cerrar sesión</a>
+                    </div>
+
+                    <a asp-page="/Admin/PanelAdmin">Panel administrativo</a>
+                }
+                else if (Context.Session.GetString("SocioId") != null)
+                {
+                    <span class="nav-usuario">👤 @Context.Session.GetString("SocioNombre")</span>
+                    <a asp-page="/Auth/Logout">Cerrar sesión</a>
+                }
+                else
+                {
+                    <a asp-page="/Auth/Login">Login</a>
+                    <a asp-page="/Auth/Registro">Registro</a>
+                    <a asp-page="/Auth/LoginAdmin">Panel administrativo</a>
+                }
             </div>
         </nav>
     </header>
