@@ -60,3 +60,9 @@ a{
 .nav-links a:hover{
     color: #cbd5e1;
 }
+
+.usuario-menu{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

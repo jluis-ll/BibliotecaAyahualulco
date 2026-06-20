@@ -25,15 +25,17 @@
 
                 @if (Context.Session.GetString("AdminId") != null)
                 {
-                    <span class="nav-usuario">🔑 @Context.Session.GetString("AdminNombre")</span>
+                    <div class="usuario-menu">
+                        <span class="nav-usuario">🔑 @Context.Session.GetString("AdminNombre")</span>
+                        <a asp-page="/Auth/LogoutAdmin">Cerrar sesión</a>
+                    </div>
+
                     <a asp-page="/Admin/PanelAdmin">Panel administrativo</a>
-                    <a asp-page="/Auth/LogoutAdmin">Cerrar sesión</a>
                 }
                 else if (Context.Session.GetString("SocioId") != null)
                 {
                     <span class="nav-usuario">👤 @Context.Session.GetString("SocioNombre")</span>
                     <a asp-page="/Auth/Logout">Cerrar sesión</a>
-                    <a asp-page="/Auth/LoginAdmin">Panel administrativo</a>
                 }
                 else
                 {
