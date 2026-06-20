@@ -40,8 +40,17 @@ public class DetalleLibroModel : PageModel
 
     public IActionResult OnPostReservar(int FolioLibro)
     {
-        int numSocioPrueba = 1;
+        var socioId = HttpContext.Session.GetString("SocioId");
 
+        if (string.IsNullOrEmpty(socioId))
+        {
+            return RedirectToPage("/Auth/Login", new
+            {
+                returnUrl = $"/Libros/DetalleLibro/{FolioLibro}"
+            });
+        }
+
+        int numSocio = int.Parse(socioId);
         var libro = _context.Libros
             .FirstOrDefault(l => l.FolioLibro == FolioLibro);
 
@@ -59,7 +68,7 @@ public class DetalleLibroModel : PageModel
         }
 
         var reservaExistente = _context.Reservas
-            .Any(r => r.NumSocio == numSocioPrueba &&
+            .Any(r => r.NumSocio == numSocio &&
                       r.FolioLibro == FolioLibro);
 
         if (reservaExistente)
@@ -72,7 +81,7 @@ public class DetalleLibroModel : PageModel
 
         var reserva = new Reserva
         {
-            NumSocio = numSocioPrueba,
+            NumSocio = numSocio,
             FolioLibro = FolioLibro,
             FechaReserva = DateTime.Now
         };
@@ -88,7 +97,17 @@ public class DetalleLibroModel : PageModel
 
     public IActionResult OnPostSolicitarPrestamo(int FolioLibro)
     {
-        int numSocioPrueba = 1;
+        var socioId = HttpContext.Session.GetString("SocioId");
+
+        if (string.IsNullOrEmpty(socioId))
+        {
+            return RedirectToPage("/Auth/Login", new
+            {
+                returnUrl = $"/Libros/DetalleLibro/{FolioLibro}"
+            });
+        }
+
+        int numSocio = int.Parse(socioId);
 
         var libro = _context.Libros
             .FirstOrDefault(l => l.FolioLibro == FolioLibro);
@@ -107,7 +126,7 @@ public class DetalleLibroModel : PageModel
         }
 
         var prestamoExistente = _context.Prestamos
-            .Any(p => p.NumSocio == numSocioPrueba &&
+            .Any(p => p.NumSocio == numSocio &&
                       p.FolioLibro == FolioLibro &&
                       p.EstatusPrestamo != "Entregado");
 
@@ -121,7 +140,8 @@ public class DetalleLibroModel : PageModel
 
         var prestamo = new Prestamo
         {
-            NumSocio = numSocioPrueba,
+            NumSocio = numSocio
+            ,
             FolioLibro = FolioLibro,
             FechaInicio = DateTime.Now,
             FechaEntrega = DateTime.Now.AddDays(7),
