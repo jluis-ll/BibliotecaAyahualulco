@@ -108,16 +108,22 @@
                     <td>@prestamo.EstatusPrestamo</td>
 
                     <td>
-                        @if (prestamo.EstatusPrestamo == "Prestado")
+                        @if (prestamo.EstatusPrestamo == "Solicitado")
                         {
-                            <form method="post" asp-page-handler="Devolver">
+                            <form method="post" asp-page-handler="Aprobar">
                                 <input type="hidden" name="NumPrestamo" value="@prestamo.NumPrestamo" />
-                                <button type="submit" class="btn-registrar">Devolver</button>
+
+                                <button type="submit" class="btn btn-success">
+                                    Aprobar
+                                </button>
                             </form>
                         }
-                        else
+
+                        @if (prestamo.EstatusPrestamo == "Prestado")
                         {
-                            <span style="color:green;">Devuelto</span>
+                            <a asp-page="/Admin/Devoluciones" class="btn btn-primary">
+                                Devolver
+                            </a>
                         }
                     </td>
                 </tr>

@@ -37,22 +37,36 @@
             <p><strong>Pasillo:</strong> @Model.Libro.IdUbicacionNavigation.IdPasilloNavigation.NomPasillo</p>
             <p><strong>Piso:</strong> @Model.Libro.IdUbicacionNavigation.Piso</p>
 
-            @{
-                bool autenticado = HttpContext.Session.GetString("SocioId") != null;
-                string returnUrl = Uri.EscapeDataString(Request.Path + Request.QueryString);
-            }
-
             <div class="acciones">
-                @if (autenticado)
+
+                @if (TempData["Error"] != null)
                 {
-                    <button class="btn-prestamo">Solicitar préstamo</button>
-                    <button class="btn-reserva">Reservar libro</button>
+                    <div class="alert alert-danger mt-3">
+                        @TempData["Error"]
+                    </div>
                 }
-                else
+
+                @if (TempData["Exito"] != null)
                 {
-                    <a href="/Auth/Login?returnUrl=@returnUrl" class="btn-prestamo">Solicitar préstamo</a>
-                    <a href="/Auth/Login?returnUrl=@returnUrl" class="btn-reserva">Reservar libro</a>
+                    <div class="alert alert-success mt-3">
+                        @TempData["Exito"]
+                    </div>
                 }
+                <form method="post" asp-page-handler="SolicitarPrestamo">
+                    <input type="hidden" name="FolioLibro" value="@Model.Libro.FolioLibro" />
+
+                    <button type="submit" class="btn-prestamo">
+                        Solicitar préstamo
+                    </button>
+                </form>
+
+                <form method="post" asp-page-handler="Reservar">
+                    <input type="hidden" name="FolioLibro" value="@Model.Libro.FolioLibro" />
+
+                    <button type="submit" class="btn-reserva">
+                        Reservar libro
+                    </button>
+                </form>
             </div>
         </div>
 

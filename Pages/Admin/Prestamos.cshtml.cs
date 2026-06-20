@@ -136,4 +136,23 @@ public class PrestamosModel : PageModel
         TempData["Exito"] = "Libro devuelto correctamente";
         return RedirectToPage();
     }
+
+    public IActionResult OnPostAprobar(int NumPrestamo)
+    {
+        var prestamo = _context.Prestamos
+            .FirstOrDefault(p => p.NumPrestamo == NumPrestamo);
+
+        if (prestamo == null)
+        {
+            return NotFound();
+        }
+
+        prestamo.EstatusPrestamo = "Prestado";
+
+        _context.SaveChanges();
+
+        TempData["Exito"] = "Préstamo aprobado correctamente.";
+
+        return RedirectToPage();
+    }
 }

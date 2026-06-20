@@ -24,7 +24,7 @@ public class DevolucionesModel : PageModel
         var consulta = _context.Prestamos
             .Include(p => p.FolioLibroNavigation)
             .Include(p => p.NumSocioNavigation)
-            .Where(p => p.EstatusPrestamo != "Entregado")
+            .Where(p => p.EstatusPrestamo == "Prestado")
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(Buscar))
