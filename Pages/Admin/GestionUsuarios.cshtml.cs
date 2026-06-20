@@ -43,7 +43,9 @@ public class GestionUsuariosModel : PageModel
         string CorreoElectronico,
         string Direccion,
         string Telefono,
-        int NumeroCredencial)
+        int NumeroCredencial,
+        string Contraseña
+        )
     {
         var credencial = new Credencial
         {
@@ -58,7 +60,8 @@ public class GestionUsuariosModel : PageModel
             NombCompleto = NombreCompleto,
             CorreoElectronico = CorreoElectronico,
             Direccion = Direccion,
-            MatriculaCredencial = credencial.MatriculaCredencial
+            MatriculaCredencial = credencial.MatriculaCredencial,
+            Contrasena = Contraseña
         };
 
         _context.Socios.Add(socio);
@@ -84,7 +87,8 @@ public class GestionUsuariosModel : PageModel
         string CorreoElectronico,
         string Direccion,
         string Telefono,
-        int NumeroCredencial)
+        int NumeroCredencial,
+        string Contrasena)
     {
         var socio = _context.Socios
             .Include(s => s.Telefonos)
@@ -99,6 +103,7 @@ public class GestionUsuariosModel : PageModel
         socio.NombCompleto = NombreCompleto;
         socio.CorreoElectronico = CorreoElectronico;
         socio.Direccion = Direccion;
+        socio.Contrasena = Contrasena;
 
         if (socio.MatriculaCredencialNavigation != null)
         {

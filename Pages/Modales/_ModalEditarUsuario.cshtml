@@ -43,6 +43,12 @@
                                    name="NumeroCredencial" required>
                         </div>
 
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="editarContrasenaUsuario" name="Contrasena"
+                                   required>
+                        </div>
+
                     </div>
 
                     <div class="modal-footer px-0 pb-0">
@@ -85,5 +91,8 @@
 
         document.getElementById('editarCredencialUsuario').value =
             boton.getAttribute('data-credencial');
+
+        document.getElementById('editarContrasenaUsuario').value =
+            boton.getAttribute('data-contrasena');
     });
 </script>

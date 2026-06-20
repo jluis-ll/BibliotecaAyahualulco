@@ -70,7 +70,8 @@
                                 data-id="@socio.NumSocio" data-nombre="@socio.NombCompleto"
                                 data-correo="@socio.CorreoElectronico" data-direccion="@socio.Direccion"
                                 data-telefono="@socio.Telefonos.FirstOrDefault()?.Numero"
-                                data-credencial="@socio.MatriculaCredencialNavigation?.Numero">
+                                data-credencial="@socio.MatriculaCredencialNavigation?.Numero"
+                                data-contrasena="@socio.Contrasena">
                             Editar
                         </button>
                         <button class="eliminar" data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario"

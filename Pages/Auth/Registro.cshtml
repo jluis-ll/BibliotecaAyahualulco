@@ -4,7 +4,7 @@
     ViewData["Title"] = "Registro";
 }
 
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/Auth/registro.css" />
 }
 
@@ -13,35 +13,44 @@
         <h1>Registro de lector</h1>
         <p>Crea tu cuenta para solicitar préstamos y reservas.</p>
 
-        <form>
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @Model.ErrorMessage
+            </div>
+        }
+
+        @if (Model.ExitoMessage != null)
+        {
+            <div class="alert alert-success">
+                @Model.ExitoMessage
+            </div>
+        }
+
+        <form method="post">
             <div class="campo">
                 <label>Nombre completo</label>
-                <input type="text" placeholder="Ingresa tu nombre completo">
+                <input type="text" name="NombreCompleto" placeholder="Ingresa tu nombre completo" required>
             </div>
 
             <div class="campo">
                 <label>Dirección</label>
-                <input type="text" placeholder="Ingresa tu dirección">
+                <input type="text" name="Direccion" placeholder="Ingresa tu dirección" required>
             </div>
 
             <div class="campo">
                 <label>Teléfono</label>
-                <input type="tel" placeholder="Ingresa tu teléfono">
+                <input type="tel" name="Telefono" placeholder="Ingresa tu teléfono" required>
             </div>
 
             <div class="campo">
                 <label>Correo</label>
-                <input type="email" placeholder="Ingresa tu correo">
-            </div>
-
-            <div class="campo">
-                <label>Fiador</label>
-                <input type="text" placeholder="Nombre del fiador">
+                <input type="email" name="CorreoElectronico" placeholder="Ingresa tu correo" required>
             </div>
 
             <div class="campo">
                 <label>Contraseña</label>
-                <input type="password" placeholder="Crea una contraseña">
+                <input type="password" name="Contrasena" placeholder="Crea una contraseña" required>
             </div>
 
             <button type="submit" class="btn-registro">Registrarme</button>
