@@ -26,9 +26,19 @@
 
     <div class="accesos">
         <a asp-page="/Libros/Catalogo" class="boton">Catálogo</a>
-        <a asp-page="/Auth/Login" class="boton">Iniciar sesión</a>
-        <a asp-page="/Auth/Registro" class="boton">Registro</a>
-        <a asp-page="/Admin/PanelAdmin" class="boton">Panel administrativo</a>
+
+        @if (HttpContext.Session.GetString("AdminId") != null)
+        {
+            <a asp-page="/Admin/PanelAdmin" class="boton">Panel administrativo</a>
+
+
+        }
+        else if (HttpContext.Session.GetString("SocioId") == null)
+        {
+            <a asp-page="/Auth/Login" class="boton">Iniciar sesión</a>
+            <a asp-page="/Auth/Registro" class="boton">Registro</a>
+            <a asp-page="/Auth/LoginAdmin" class="boton">Panel administrativo</a>
+        }
     </div>
 
     <section class="populares">
