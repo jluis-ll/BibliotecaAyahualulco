@@ -173,7 +173,7 @@ CREATE TABLE `libro` (
 
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
-INSERT INTO `libro` VALUES (1,'Cien Años de Soledad',978100001,'Nuevo',417,'Colombia',5,1,1),(2,'Don Quijote de la Mancha',978100002,'Bueno',863,'España',3,2,2),(3,'El Principito',978100003,'Nuevo',120,'Francia',4,3,3),(4,'Harry Potter y la Piedra Filosofal',978100004,'Nuevo',320,'Reino Unido',6,4,4),(5,'1984',978100005,'Usado',328,'Reino Unido',2,5,5),(6,'Orgullo y Prejuicio',978100006,'Bueno',279,'Reino Unido',3,6,6),(7,'Crónica de una Muerte Anunciada',978100007,'Regular',122,'Colombia',2,7,7),(8,'La Odisea',978100008,'Usado',500,'Grecia',1,8,8),(9,'El Hobbit',978100009,'Nuevo',310,'Reino Unido',7,9,9),(10,'Rayuela',978100010,'Bueno',600,'Argentina',2,10,10),(11,'Libro1',232542,'Nuevo',4546,'zimbawe',4,10,11);
+INSERT INTO `libro` VALUES (1,'Cien Años de Soledad',978100001,'Nuevo',417,'Colombia',5,1,1),(2,'Don Quijote de la Mancha',978100002,'Bueno',863,'España',3,2,2),(3,'El Principito',978100003,'Nuevo',120,'Francia',4,3,3),(4,'Harry Potter y la Piedra Filosofal',978100004,'Nuevo',320,'Reino Unido',6,4,4),(5,'1984',978100005,'Usado',328,'Reino Unido',2,5,5),(6,'Orgullo y Prejuicio',978100006,'Bueno',279,'Reino Unido',3,6,6),(7,'Crónica de una Muerte Anunciada',978100007,'Regular',122,'Colombia',2,7,7),(8,'La Odisea',978100008,'Usado',500,'Grecia',1,8,8),(9,'El Hobbit',978100009,'Nuevo',310,'Reino Unido',7,9,9),(10,'Rayuela',978100010,'Bueno',600,'Argentina',2,10,10),(11,'Libro1',232542,'Nuevo',4546,'zimbawe',3,10,11);
 /*!40000 ALTER TABLE `libro` ENABLE KEYS */;
 UNLOCK TABLES;
 
